@@ -1,0 +1,88 @@
+<div ng-controller="rentedCtrl">
+	<div class="container" id="container">
+		<br>
+		
+			<label>Select Month</label> 
+			
+			<select  class="form-control"  ng-model="selectedMonth.operator" ng-change="selectedChange()">
+				<option  ng-selected="{{operator.value == selectedMonth.operator}}" ng-repeat="operator in operators" value="{{operator.value}}">{{operator.displayName}}</option>
+			
+			</select>
+	
+	
+		<div class="row">
+		
+		
+	   <!-- pie chart -->
+		<div  ng-show="showPieChart" style="padding-top:25px;  margin-left: auto; margin-right: auto; width: 450px;">
+			
+			<canvas id="pieChart" class="chart chart-pie"
+			  chart-data="data" chart-labels="labels" chart-options="options"  width="640" height="320" style=" width: 320px; height: 160px;">
+			</canvas>
+		
+		</div>
+		
+			<div class="col-lg-12">
+				<br> 
+			
+				<!-- table that shows product record list -->
+				<div id="exportable">
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Type</th>
+									<th>Name</th>
+									<th>Description</th>
+									<th>Avaiable</th>
+									<th>Price</th>
+								
+								</tr>
+							</thead>
+
+							<tbody ng-init="getAll()">
+								<tr ng-repeat="d in tools | filter:search">
+									<td class="text-align-center">{{ d.type }}</td>
+									<td ng-bind-html="d.name" >{{ d.name }}</td>
+									<td ng-bind-html="d.description">{{ d.description }}</td>
+									<td ng-if=" d.available == 1">Yes</td>
+									<td ng-if=" d.available == 0">No</td>
+									<td class="text-align-center">${{ d.price }}/week</td>
+								
+								</tr>
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+<!-- floating report tool button -->
+	<div  class="fixed-action-btn"
+			style="bottom: 45px; right: 24px;">
+			
+			<div>
+				<a
+					class="waves-effect waves-light btn modal-trigger btn-floating btn-large green"
+					 ng-click="showChart()">Chart<br>
+				<i class="large material-icons "></i></a>
+			</div>
+			<br>
+			<div>
+				<a
+					class="waves-effect waves-light btn modal-trigger btn-floating btn-large blue"
+					 ng-click="createReport()">Report<br>
+				<i class="large material-icons "></i></a>
+			</div>
+			<br>
+			<div>
+				<a
+					class="waves-effect waves-light btn modal-trigger btn-floating btn-large red"
+					 ng-click="createPDF()">PDF<br>
+				<i class="large material-icons "></i></a>
+			</div>
+	</div>
+</div>
