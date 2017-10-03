@@ -4,8 +4,8 @@ class Database{
     // specify your own database credentials 
     private $host = "localhost"; 
     private $db_name = "tool_rental"; 
-    private $username = "root"; 
-    private $password = "live4ever"; 
+    private $username = "user"; 
+    private $password = "password"; 
     public $conn; 
  
     // get the database connection 
